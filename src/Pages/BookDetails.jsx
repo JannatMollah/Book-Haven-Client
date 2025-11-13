@@ -1,13 +1,31 @@
-import React from 'react';
+import React, { use, useEffect, useState } from 'react';
 import { MdReviews } from "react-icons/md";
 import NotFound from './NotFound';
-import { Link, useLoaderData, useNavigate } from 'react-router';
+import { Link, useLoaderData, useNavigate, useParams } from 'react-router';
 import Swal from 'sweetalert2';
+import { AuthContext } from '../Provider/AuthProvider';
 
 const BookDetails = () => {
-    const data = useLoaderData()
-    const book = data.result
     const navigate = useNavigate()
+    const { id } = useParams()
+    const [book, setBook] = useState({})
+    const [loading, setLoading] = useState(true)
+    const {user} = use(AuthContext)
+
+    useEffect(() => {
+        fetch(`http://localhost:3000/books/${id}`,{
+          headers: {
+            authorization: `Bearer ${user.accessToken}`
+          }
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            setBook(data.result)
+            setLoading(false)
+        })
+    },[])
+
 
     const handleDelete = () => {
         Swal.fire({
@@ -45,6 +63,10 @@ const BookDetails = () => {
         });
     }
 
+
+    if (loading) {
+        return <div>Loading...</div>
+    }
 
     return (
         <div className='bg-[#E9E9E9] py-6 sm:py-8 lg:py-10 px-4 sm:px-8 lg:px-17'>
