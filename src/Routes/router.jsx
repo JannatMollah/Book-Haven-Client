@@ -23,7 +23,7 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
-        loader: () => fetch("http://localhost:3000/books").then(res => res.json())
+        loader: () => fetch("http://localhost:3000/latest").then(res => res.json())
       },
       {
         path: "all-books",

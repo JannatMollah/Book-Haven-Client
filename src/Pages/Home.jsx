@@ -4,7 +4,6 @@ import SwiperBanner from '../components/SwiperBanner';
 import { useLoaderData } from 'react-router';
 import Stats from '../components/Stats';
 import FeaturedBook from '../components/FeaturedBook';
-import Genres from '../components/Genres';
 import About from '../components/About';
 import Newsletter from '../components/Newsletter';
 
@@ -16,7 +15,6 @@ const Home = () => {
             <SwiperBanner BooksData={BooksData}/>
             <Stats/>
             <FeaturedBook BooksData={BooksData}/>
-            <Genres BooksData={BooksData}/>
             <About/>
             <Newsletter/>
         </div>
