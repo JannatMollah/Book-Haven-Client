@@ -23,7 +23,7 @@ const FeaturedBook = ({ BooksData }) => {
             </Suspense>
 
             <Link
-                to="/books"
+                to="/all-books"
                 className="btn mt-10 bg-linear-to-r from-[#632EE3] to-[#9F62F2] text-white font-semibold px-10 py-2 rounded-lg"
             >
                 Show All Books
