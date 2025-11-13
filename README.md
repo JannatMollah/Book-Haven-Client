@@ -4,7 +4,7 @@
 
 ## 🌐 Live Url
 
-- 🔗 **Live URL (Netlify):** [https://jannatpha10.netlify.app/](https://jannatpha10.netlify.app/)  
+- 🔗 **Live URL (Netlify):** https://jannatpha10.netlify.app
 - **GitHub Client Repository:** https://github.com/JannatMollah/Book-Haven-Client
 - **GitHub Server Repository:** https://github.com/JannatMollah/Book-Haven-Server
 
@@ -149,11 +149,3 @@ Book Haven is a comprehensive digital library platform that provides users with 
 - Implement book clubs and group reading features
 
 ---
-
-### **License**
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
----
-
-**Built with ❤️ using React, Node.js, and MongoDB**
