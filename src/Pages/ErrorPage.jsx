@@ -7,8 +7,6 @@ import { Link, NavLink } from 'react-router';
 const ErrorPage = () => {
     return (
         <div className="flex flex-col min-h-screen bg-[#E9E9E9]">
-            <Navber />
-
             <div className="flex flex-col grow items-center justify-center text-center px-4 py-10">
                 <img
                     src={ErrorImage}
@@ -30,8 +28,6 @@ const ErrorPage = () => {
                     Go Back Home
                 </Link>
             </div>
-
-            <Footer />
         </div>
     );
 };
