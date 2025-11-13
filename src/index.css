@@ -6,3 +6,11 @@
 *{
   font-family: "Inter", sans-serif;
 }
+.swiper-button-next,
+.swiper-button-prev {
+  color: #632EE3 !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: #632EE3 !important;
+}

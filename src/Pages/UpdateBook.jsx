@@ -1,140 +1,134 @@
+import axios from 'axios';
 import React from 'react';
-import { useLoaderData } from 'react-router';
+import { useLoaderData, useNavigate } from 'react-router';
+import { toast } from 'react-toastify';
+
 
 const UpdateBook = () => {
-    const data = useLoaderData()
-    const book = data.result
-        const handleSubmit = (e) => {
-        e.preventDefault()
+    const book = useLoaderData().result;
+    const navigate = useNavigate();
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        
         const formData = {
             title: e.target.title.value,
             author: e.target.author.value,
             genre: e.target.genre.value,
-            rating: e.target.rating.value,
+            rating: parseFloat(e.target.rating.value),
             summary: e.target.summary.value,
-            coverImage: e.target.coverImageURL.value,
-            userEmail: e.target.userEmail.value
+            coverImage: e.target.coverImage.value
+        };
+
+        try {
+            await axios.put(`https://book-haven-server-alpha.vercel.app/books/${book._id}`, formData);
+            toast.success('Book updated successfully!');
+            navigate(`/book-details/${book._id}`);
+        } catch (error) {
+            console.error('Error updating book:', error);
+            toast.error('Failed to update book');
         }
+    };
 
-        fetch(`http://localhost:3000/books/${book._id}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(formData)
-        })
-        .then(res => res.json())
-        .then(data => {
-            console.log(data)
-        })
-        .catch(err => {
-            console.log(err);
-        })
-    }
-    
     return (
-        <div className="min-h-screen flex flex-col justify-center items-center bg-gray-50 px-4">
-            <div className="w-full max-w-md bg-white p-8 rounded-xl shadow-sm">
-                <h2 className="text-center text-2xl font-bold text-gray-900 mb-5">
-                    Update Book Details
-                </h2>
+        <div className="min-h-screen bg-gray-50 py-8">
+            <div className="container mx-auto px-4">
+                <div className="max-w-2xl mx-auto">
+                    <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8">
+                        <h1 className="text-3xl font-bold text-center mb-8">Update Book</h1>
+                        
+                        <form onSubmit={handleSubmit} className="space-y-6">
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text font-semibold">Book Title</span>
+                                </label>
+                                <input
+                                    type="text"
+                                    name="title"
+                                    defaultValue={book.title}
+                                    className="input input-bordered"
+                                    required
+                                />
+                            </div>
 
-                <form onSubmit={handleSubmit} className="space-y-5">
-                    <div>
-                        <label htmlFor="title" className="block text-sm font-medium text-gray-700">
-                            Title
-                        </label>
-                        <input
-                            id="title"
-                            name="title"
-                            type="text"
-                            defaultValue={book.title}
-                            required
-                            className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 shadow-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 sm:text-sm"
-                            placeholder="Enter Book Title"
-                        />
-                        <label htmlFor="author" className="block text-sm font-medium text-gray-700">
-                            Author
-                        </label>
-                        <input
-                            id="author"
-                            name="author"
-                            type="text"
-                            defaultValue={book.author}
-                            required
-                            className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 shadow-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 sm:text-sm"
-                            placeholder="Enter Book Author"
-                        />
-                        <label htmlFor="genre" className="block text-sm font-medium text-gray-700">
-                            Genre
-                        </label>
-                        <input
-                            id="genre"
-                            name="genre"
-                            type="text"
-                            defaultValue={book.genre}
-                            required
-                            className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 shadow-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 sm:text-sm"
-                            placeholder="Enter Book Genre"
-                        />
-                        <label htmlFor="rating" className="block text-sm font-medium text-gray-700">
-                            Rating
-                        </label>
-                        <input
-                            id="rating"
-                            name="rating"
-                            type="text"
-                            defaultValue={book.rating}
-                            required
-                            className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 shadow-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 sm:text-sm"
-                            placeholder="Enter Book Rating"
-                        />
-                        <label htmlFor="summary" className="block text-sm font-medium text-gray-700">
-                            Summary
-                        </label>
-                        <input
-                            id="summary"
-                            name="summary"
-                            type="text"
-                            defaultValue={book.summary}
-                            required
-                            className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 shadow-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 sm:text-sm"
-                            placeholder="Enter Book Summary"
-                        />
-                        <label htmlFor="coverImageURL" className="block text-sm font-medium text-gray-700">
-                            Cover Image
-                        </label>
-                        <input
-                            id="coverImageURL"
-                            name="coverImageURL"
-                            type="url"
-                            defaultValue={book.coverImage}
-                            required
-                            className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 shadow-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 sm:text-sm"
-                            placeholder="Enter Book Cover Image URL"
-                        />
-                        <label htmlFor="userEmail" className="block text-sm font-medium text-gray-700">
-                            User Email
-                        </label>
-                        <input
-                            id="userEmail"
-                            name="userEmail"
-                            type="email"
-                            defaultValue={book.userEmail}
-                            required
-                            className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 shadow-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 sm:text-sm"
-                            placeholder="Enter User Email"
-                        />
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text font-semibold">Author</span>
+                                </label>
+                                <input
+                                    type="text"
+                                    name="author"
+                                    defaultValue={book.author}
+                                    className="input input-bordered"
+                                    required
+                                />
+                            </div>
+
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text font-semibold">Genre</span>
+                                </label>
+                                <select name="genre" className="select select-bordered" defaultValue={book.genre} required>
+                                    <option value="Fiction">Fiction</option>
+                                    <option value="Non-Fiction">Non-Fiction</option>
+                                    <option value="Science Fiction">Science Fiction</option>
+                                    <option value="Fantasy">Fantasy</option>
+                                    <option value="Mystery">Mystery</option>
+                                    <option value="Romance">Romance</option>
+                                    <option value="Thriller">Thriller</option>
+                                    <option value="Biography">Biography</option>
+                                    <option value="History">History</option>
+                                    <option value="Self-Help">Self-Help</option>
+                                </select>
+                            </div>
+
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text font-semibold">Rating (1-5)</span>
+                                </label>
+                                <select name="rating" className="select select-bordered" defaultValue={book.rating} required>
+                                    <option value="1">1 Star</option>
+                                    <option value="2">2 Stars</option>
+                                    <option value="3">3 Stars</option>
+                                    <option value="4">4 Stars</option>
+                                    <option value="5">5 Stars</option>
+                                </select>
+                            </div>
+
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text font-semibold">Cover Image URL</span>
+                                </label>
+                                <input
+                                    type="url"
+                                    name="coverImage"
+                                    defaultValue={book.coverImage}
+                                    className="input input-bordered"
+                                    required
+                                />
+                            </div>
+
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text font-semibold">Summary</span>
+                                </label>
+                                <textarea
+                                    name="summary"
+                                    defaultValue={book.summary}
+                                    className="textarea textarea-bordered h-32"
+                                    required
+                                ></textarea>
+                            </div>
+
+                            <div className="form-control mt-8">
+                                <button type="submit" className="btn btn-primary btn-lg text-white">
+                                    <i className="fa-solid fa-save mr-2"></i>
+                                    Update Book
+                                </button>
+                            </div>
+                        </form>
                     </div>
-
-                    <button
-                        type="submit"
-                        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors duration-200"
-                    >
-                        Update
-                    </button>
-                </form>
+                </div>
             </div>
         </div>
     );

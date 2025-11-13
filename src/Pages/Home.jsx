@@ -2,7 +2,6 @@ import React from 'react';
 import Banner from '../components/Banner';
 import SwiperBanner from '../components/SwiperBanner';
 import { useLoaderData } from 'react-router';
-import Stats from '../components/Stats';
 import FeaturedBook from '../components/FeaturedBook';
 import About from '../components/About';
 import Newsletter from '../components/Newsletter';
@@ -13,7 +12,6 @@ const Home = () => {
         <div>
             <Banner/>
             <SwiperBanner BooksData={BooksData}/>
-            <Stats/>
             <FeaturedBook BooksData={BooksData}/>
             <About/>
             <Newsletter/>

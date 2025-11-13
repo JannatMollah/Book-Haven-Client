@@ -59,21 +59,39 @@ const Navber = () => {
                 </ul>
             </div>
             <div className="navbar-end gap-2">
-                {user?.email ? (
-                    <>
-                        <button onClick={handleLogOut} className="btn btn-sm bg-linear-to-r from-[#632EE3] to-[#9F62F2] text-white">Logout</button>
-                        <div className="avatar">
-                            <div className="ring-primary ring-offset-base-100 w-14 rounded-full ring-2 ring-offset-2">
-                                <img src={user.photoURL || "https://img.daisyui.com/images/profile/demo/spiderperson@192.webp"} />
+                {user ? (
+                    <div className="flex items-center gap-3">
+                        <div className="dropdown dropdown-end">
+                            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                                <div className="w-10 rounded-full">
+                                    <img 
+                                        src={user.photoURL || "https://i.ibb.co.com/4RgYZ1Q/default-avatar.png"} 
+                                        alt={user.displayName || "User"} 
+                                    />
+                                </div>
                             </div>
+                            <ul tabIndex={0} className="mt-3 z-50 p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+                                <li className="p-2 border-b">
+                                    <span className="text-sm font-semibold">{user.displayName || 'User'}</span>
+                                    <span className="text-xs text-gray-500">{user.email}</span>
+                                </li>
+                                <li>
+                                    <button onClick={handleLogOut} className="text-red-600">
+                                        <i className="fa-solid fa-right-from-bracket"></i> Logout
+                                    </button>
+                                </li>
+                            </ul>
                         </div>
-
-                    </>
+                    </div>
                 ) : (
-                    <>
-                        <Link to="/login" className="btn btn-sm lg:btn-md bg-linear-to-r from-[#632EE3] to-[#9F62F2] text-white">Sign In</Link>
-                        <Link to="/register" className="btn btn-sm lg:btn-md bg-linear-to-r from-[#632EE3] to-[#9F62F2] text-white">Sign Up</Link>
-                    </>
+                    <div className="flex gap-2">
+                        <Link to="/login" className="btn btn-outline btn-sm">
+                            Sign In
+                        </Link>
+                        <Link to="/register" className="btn btn-primary btn-sm text-white">
+                            Sign Up
+                        </Link>
+                    </div>
                 )}
             </div>
         </div>

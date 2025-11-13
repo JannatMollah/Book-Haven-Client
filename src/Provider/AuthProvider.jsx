@@ -1,14 +1,16 @@
 import React, { createContext, useState, useEffect } from "react";
-import { getAuth,
-         createUserWithEmailAndPassword,
-         signInWithEmailAndPassword,
-         signInWithPopup,
-         GoogleAuthProvider,
-         onAuthStateChanged,
-         signOut,
-         updateProfile,
-         sendPasswordResetEmail } from "firebase/auth";
-import app from "../FireBase/firebase.config";
+import { 
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  GoogleAuthProvider,
+  onAuthStateChanged,
+  signOut,
+  updateProfile,
+  sendPasswordResetEmail 
+} from "firebase/auth";
+import app from "../Firebase/firebase.config.js";
 
 export const AuthContext = createContext();
 
@@ -42,7 +44,13 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logOut = () => {
+    setLoading(true);
     return signOut(auth);
+  };
+
+  const resetPassword = (email) => {
+    setLoading(true);
+    return sendPasswordResetEmail(auth, email);
   };
 
   useEffect(() => {
@@ -52,11 +60,6 @@ export const AuthProvider = ({ children }) => {
     });
     return unsubscribe;
   }, []);
-
-  const resetPassword = (email) => {
-    setLoading(true);
-    return sendPasswordResetEmail(auth, email);
-  };
 
   const value = {
     user,
