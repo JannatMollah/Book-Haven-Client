@@ -1,12 +1,49 @@
 import React from 'react';
 import { MdReviews } from "react-icons/md";
 import NotFound from './NotFound';
-import { Link, useLoaderData } from 'react-router';
+import { Link, useLoaderData, useNavigate } from 'react-router';
+import Swal from 'sweetalert2';
 
 const BookDetails = () => {
     const data = useLoaderData()
     const book = data.result
+    const navigate = useNavigate()
 
+    const handleDelete = () => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                fetch(`http://localhost:3000/books/${book._id}`, {
+                    method: "DELETE",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    navigate('/all-books')
+
+                    Swal.fire({
+                    title: "Deleted!",
+                    text: "Your file has been deleted.",
+                    icon: "success"
+                });
+                })
+                .catch(err => {
+                    console.log(err);
+                }) 
+            }
+        });
+    }
 
 
     return (
@@ -30,12 +67,11 @@ const BookDetails = () => {
                         >
                             Update Details
                         </Link>
-                        <Link
-                            to={`/`}
-                            className="btn my-3 bg-linear-to-r from-[#632EE3] to-[#9F62F2] text-white font-semibold px-10 py-2 rounded-lg"
-                        >
+                        <button
+                            onClick={handleDelete}
+                            className="btn my-3 bg-linear-to-r from-[#632EE3] to-[#9F62F2] text-white font-semibold px-10 py-2 rounded-lg">
                             Delete Book
-                        </Link>
+                        </button>
                     </div>
                 </div>
             </div>
