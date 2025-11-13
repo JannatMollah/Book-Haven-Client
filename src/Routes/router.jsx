@@ -53,7 +53,8 @@ const router = createBrowserRouter([
           <PrivateRoute>
             <UpdateBook />
           </PrivateRoute>
-        )
+        ),
+        loader: ({ params }) => fetch(`http://localhost:3000/books/${params.id}`)
       },
       {
         path: "delete-book/:id",

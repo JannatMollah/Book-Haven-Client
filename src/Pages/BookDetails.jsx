@@ -25,7 +25,7 @@ const BookDetails = () => {
                     <div>
                         <button className='btn my-3 bg-linear-to-r from-[#632EE3] to-[#9F62F2] text-white font-semibold px-10 py-2 rounded-lg mr-2'>Read Now</button>
                         <Link
-                            to={`/`}
+                            to={`/update-book/${book._id}`}
                             className="btn my-3 bg-linear-to-r from-[#632EE3] to-[#9F62F2] text-white font-semibold px-10 py-2 rounded-lg mr-2"
                         >
                             Update Details
