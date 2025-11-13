@@ -4,6 +4,8 @@ import { useLoaderData } from 'react-router';
 const UpdateBook = () => {
     const data = useLoaderData()
     const book = data.result
+    console.log(book);
+    
     return (
         <div className="min-h-screen flex flex-col justify-center items-center bg-gray-50 px-4">
             <div className="w-full max-w-md bg-white p-8 rounded-xl shadow-sm">
@@ -20,6 +22,7 @@ const UpdateBook = () => {
                             id="title"
                             name="title"
                             type="text"
+                            defaultValue={book.title}
                             required
                             className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 shadow-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 sm:text-sm"
                             placeholder="Enter Book Title"
@@ -31,6 +34,7 @@ const UpdateBook = () => {
                             id="author"
                             name="author"
                             type="text"
+                            defaultValue={book.author}
                             required
                             className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 shadow-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 sm:text-sm"
                             placeholder="Enter Book Author"
@@ -42,6 +46,7 @@ const UpdateBook = () => {
                             id="genre"
                             name="genre"
                             type="text"
+                            defaultValue={book.genre}
                             required
                             className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 shadow-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 sm:text-sm"
                             placeholder="Enter Book Genre"
@@ -53,6 +58,7 @@ const UpdateBook = () => {
                             id="rating"
                             name="rating"
                             type="text"
+                            defaultValue={book.rating}
                             required
                             className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 shadow-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 sm:text-sm"
                             placeholder="Enter Book Rating"
@@ -64,6 +70,7 @@ const UpdateBook = () => {
                             id="summary"
                             name="summary"
                             type="text"
+                            defaultValue={book.summary}
                             required
                             className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 shadow-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 sm:text-sm"
                             placeholder="Enter Book Summary"
@@ -75,6 +82,7 @@ const UpdateBook = () => {
                             id="coverImageURL"
                             name="coverImageURL"
                             type="url"
+                            defaultValue={book.coverImage}
                             required
                             className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 shadow-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 sm:text-sm"
                             placeholder="Enter Book Cover Image URL"
@@ -86,6 +94,7 @@ const UpdateBook = () => {
                             id="userEmail"
                             name="userEmail"
                             type="email"
+                            defaultValue={book.userEmail}
                             required
                             className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 shadow-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 sm:text-sm"
                             placeholder="Enter User Email"
