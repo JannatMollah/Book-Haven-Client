@@ -4,7 +4,34 @@ import { useLoaderData } from 'react-router';
 const UpdateBook = () => {
     const data = useLoaderData()
     const book = data.result
-    console.log(book);
+        const handleSubmit = (e) => {
+        e.preventDefault()
+
+        const formData = {
+            title: e.target.title.value,
+            author: e.target.author.value,
+            genre: e.target.genre.value,
+            rating: e.target.rating.value,
+            summary: e.target.summary.value,
+            coverImage: e.target.coverImageURL.value,
+            userEmail: e.target.userEmail.value
+        }
+
+        fetch(`http://localhost:3000/books/${book._id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(formData)
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    }
     
     return (
         <div className="min-h-screen flex flex-col justify-center items-center bg-gray-50 px-4">
@@ -13,7 +40,7 @@ const UpdateBook = () => {
                     Update Book Details
                 </h2>
 
-                <form className="space-y-5">
+                <form onSubmit={handleSubmit} className="space-y-5">
                     <div>
                         <label htmlFor="title" className="block text-sm font-medium text-gray-700">
                             Title
