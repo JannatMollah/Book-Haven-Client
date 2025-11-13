@@ -16,7 +16,7 @@ const Home = () => {
             <SwiperBanner BooksData={BooksData}/>
             <Stats/>
             <FeaturedBook BooksData={BooksData}/>
-            <Genres/>
+            <Genres BooksData={BooksData}/>
             <About/>
             <Newsletter/>
         </div>

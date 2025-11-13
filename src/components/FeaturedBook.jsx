@@ -5,7 +5,7 @@ import BookCard from './BookCard';
 const FeaturedBook = ({ BooksData }) => {
 
     return (
-        <div className="text-center bg-[#E9E9E9] py-10">
+        <div className=" w-11/12 mx-auto text-center  bg-white rounded-2xl py-10 my-12">
             <div className="flex flex-col items-center text-center mb-6">
                 <div className="flex gap-3 items-center">
                     <h2 className="text-4xl font-bold">Popular Books</h2>

@@ -26,11 +26,11 @@ const Books = () => {
         <div className="bg-[#E9E9E9] min-h-screen">
             <div className="flex flex-col items-center text-center py-10 px-4">
                 <div className="flex  sm:flex-row gap-3 items-center">
-                    <h2 className="text-3xl sm:text-4xl font-bold">Our All Applications</h2>
+                    <h2 className="text-3xl sm:text-4xl font-bold">All Books</h2>
                     <i className="fa-solid fa-layer-group text-3xl sm:text-4xl text-[#743DE7]"></i>
                 </div>
                 <p className="text-gray-500 pt-2 text-sm sm:text-base max-w-xl">
-                    Explore all apps developed by us — built for millions of users worldwide.
+                    Explore all books — built for millions of Reader worldwide.
                 </p>
             </div>
 
