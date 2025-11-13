@@ -17,7 +17,7 @@ const FeaturedBook = ({ BooksData }) => {
             <Suspense fallback={<span className="loading loading-spinner text-primary"></span>}>
                 <div className="w-11/12 mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                     {BooksData.map((BookData) => (
-                        <BookCard key={BookData.id} BookData={BookData}/>
+                        <BookCard key={BookData._id} BookData={BookData}/>
                     ))}
                 </div>
             </Suspense>

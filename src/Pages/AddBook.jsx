@@ -1,6 +1,38 @@
 import React from 'react';
 
 const AddBook = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault()
+
+        const formData = {
+            title: e.target.title.value,
+            author: e.target.author.value,
+            genre: e.target.genre.value,
+            rating: e.target.rating.value,
+            summary: e.target.summary.value,
+            coverImage: e.target.coverImageURL.value,
+            userEmail: e.target.userEmail.value
+        }
+
+        fetch('http://localhost:3000/books', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(formData)
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    }
+
+
+
+
     return (
         <div className="min-h-screen flex flex-col justify-center items-center bg-gray-50 px-4">
             <div className="w-full max-w-md bg-white p-8 rounded-xl shadow-sm">
@@ -8,7 +40,7 @@ const AddBook = () => {
                     Add Your Book
                 </h2>
 
-                <form  className="space-y-5">
+                <form onSubmit={handleSubmit} className="space-y-5">
                     <div>
                         <label htmlFor="title" className="block text-sm font-medium text-gray-700">
                             Title
@@ -75,17 +107,6 @@ const AddBook = () => {
                             required
                             className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 shadow-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 sm:text-sm"
                             placeholder="Enter Book Cover Image URL"
-                        />
-                        <label htmlFor="userName" className="block text-sm font-medium text-gray-700">
-                            User Name
-                        </label>
-                        <input
-                            id="userName"
-                            name="userName"
-                            type="text"
-                            required
-                            className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 shadow-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 sm:text-sm"
-                            placeholder="Enter User Name"
                         />
                         <label htmlFor="userEmail" className="block text-sm font-medium text-gray-700">
                             User Email

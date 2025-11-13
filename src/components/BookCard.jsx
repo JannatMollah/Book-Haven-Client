@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import { FaStar } from "react-icons/fa";
 
 const BookCard = ({ BookData }) => {
-    const { id, coverImage, author, title, genre, rating } = BookData || {};
+    const { _id, coverImage, author, title, genre, rating } = BookData || {};
 
     return (
 
@@ -24,7 +24,7 @@ const BookCard = ({ BookData }) => {
                     <span className="text-gray-700">{rating}</span>
                 </div>
                 <Link
-                    to={`/books/${id}`}
+                    to={`/book-details/${_id}`}
                     className="btn my-3 bg-linear-to-r from-[#632EE3] to-[#9F62F2] text-white font-semibold px-10 py-2 rounded-lg"
                 >
                     View Details
