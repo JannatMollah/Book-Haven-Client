@@ -28,7 +28,7 @@ const router = createBrowserRouter([
       {
         path: "all-books",
         element: <Books />,
-        loader: () => fetch("http://localhost:3000/books").then(res => res.json()),
+        loader: () => fetch("http://localhost:3000/books").then(res => res.json())
       },
       {
         path: "book-details/:id",
@@ -37,7 +37,7 @@ const router = createBrowserRouter([
             <BooksDetails />
           </PrivateRoute>
         ),
-        loader: ({ params }) => fetch("/BooksData.json").then(res => res.json()),
+        loader: ({ params }) => fetch(`http://localhost:3000/books/${params.id}`)
       },
       {
         path: "add-book",
